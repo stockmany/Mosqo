@@ -67,8 +67,8 @@ def process_paf(input_file, output_folder):
     relative_abundance = relative_abundance[relative_abundance > 1]
 
     # Print the relative abundance for species names with counts >= 20
-    print("Relative abundance for species names with counts >= 20:")
-    print(relative_abundance)
+    #print("Relative abundance for species names with counts >= 20:")
+    #print(relative_abundance)
 
     # Add file name, species name, and abundance percentages to a list
     file_name = os.path.splitext(os.path.basename(input_file))[0]
@@ -76,7 +76,7 @@ def process_paf(input_file, output_folder):
 
     return abundance_data, other_category_percentage
 
-def run_minimap2(input_folder, reference_file, output_folder):
+def run_minimap2(input_folder, output_folder):
     # Create output folders if they don't exist
     paf_output_folder = os.path.join(output_folder, "paf_files")
     csv_output_folder = os.path.join(output_folder, "csv_files")
@@ -94,11 +94,10 @@ def run_minimap2(input_folder, reference_file, output_folder):
         output_paf = os.path.join(paf_output_folder, os.path.splitext(query_file)[0] + ".paf")
         with open(output_paf, 'w') as f:
             print("Minimap2 is running")
-            subprocess.run(['minimap2', '-x', 'sr', reference_file, os.path.join(input_folder, query_file)], stdout=f, stderr=subprocess.DEVNULL)
+            subprocess.run(['minimap2', '-x', 'sr', 'COI_database.fasta', os.path.join(input_folder, query_file)], stdout=f, stderr=subprocess.DEVNULL)
 
 if __name__ == "__main__":
     input_folder = input("Enter the path to the folder containing FASTQ and FASTA files: ")
-    reference_file = input("Enter the path to the reference genome file: ")
     output_folder_base = "output"
     
     # Check if the output folder already exists
@@ -112,7 +111,7 @@ if __name__ == "__main__":
     os.makedirs(output_folder)
 
     # Run Minimap2 on all query files in the folder
-    run_minimap2(input_folder, reference_file, output_folder)
+    run_minimap2(input_folder, output_folder)
 
     # Process PAF files and generate output CSV and PNG
     abundance_data_list = []
@@ -188,4 +187,3 @@ if __name__ == "__main__":
     fig.write_html(plot_file)
 
     print(f"Plot saved as {plot_file}. Open the file in a web browser to view the plot.")
-
