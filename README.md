@@ -39,7 +39,7 @@ python P2RA.py
 
 optional: add alias for easier command
 ```
-echo 'alias Skeeter="~/P2RA.py" '>> ~/.bashrc
+echo 'alias Skeeter="~/SKEETER/P2RA.py" '>> ~/.bashrc
 ```
 
 ## Steps involved
