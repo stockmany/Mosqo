@@ -60,7 +60,7 @@ The abundance data is visualized using Plotly, generating a stacked bar plot sho
 ## Input requirements
 **Sequencing Data:** FASTQ and/or FASTA files containing sequencing reads.
 
-**Reference Database:** The script utilizes the COI_database.fasta file for alignment.
+**Reference Database:** The script utilizes the internal COI_database.fasta file for alignment.
 
 ## Output
 **Abundance Data CSV**: Contains abundance percentages for each species across different samples.
