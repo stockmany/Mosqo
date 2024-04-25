@@ -95,6 +95,17 @@ def run_minimap2(input_folder, output_folder):
         with open(output_paf, 'w') as f:
             print("Minimap2 is running")
             subprocess.run(['minimap2', '-x', 'sr', 'COI_database.fasta', os.path.join(input_folder, query_file)], stdout=f, stderr=subprocess.DEVNULL)
+        
+        # Check the size of the generated PAF file
+        paf_size_kb = os.path.getsize(output_paf) / 1024  # Convert bytes to KB
+        if paf_size_kb < 10:
+            # Delete the small PAF file and skip further processing
+            os.remove(output_paf)
+            print(f"PAF file {output_paf} is smaller than 10 KB. Skipping further processing.")
+            continue
+        
+        # Proceed with further processing if the PAF file is large enough
+        process_paf(output_paf, output_folder)
 
 if __name__ == "__main__":
     input_folder = input("Enter the path to the folder containing FASTQ and FASTA files: ")
