@@ -66,10 +66,6 @@ def process_paf(input_file, output_folder):
     relative_abundance['other <1%'] = other_category_percentage
     relative_abundance = relative_abundance[relative_abundance > 1]
 
-    # Print the relative abundance for species names with counts >= 20
-    #print("Relative abundance for species names with counts >= 20:")
-    #print(relative_abundance)
-
     # Add file name, species name, and abundance percentages to a list
     file_name = os.path.splitext(os.path.basename(input_file))[0]
     abundance_data = [{'File Name': file_name, 'Species Name': species, 'Abundance Percentage': relative_abundance[species]} for species in relative_abundance.index]
@@ -91,6 +87,11 @@ def run_minimap2(input_folder, output_folder):
 
     # Run Minimap2 on each query file
     for query_file in query_files:
+        # Check if the file ends with .fastq or .fasta
+        if not (query_file.endswith('.fastq') or query_file.endswith('.fasta')):
+            print(f"Skipping file {query_file} as it does not end with .fastq or .fasta")
+            continue
+        
         output_paf = os.path.join(paf_output_folder, os.path.splitext(query_file)[0] + ".paf")
         with open(output_paf, 'w') as f:
             print("Minimap2 is running")
