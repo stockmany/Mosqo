@@ -181,14 +181,16 @@ if __name__ == "__main__":
         )
         traces.append(trace_other)
 
+    # Get sorted unique file names
+    sorted_file_names = sorted(file_names)
+
     # Create layout
     layout = go.Layout(
         title="Abundance Percentage by Species Name",
-        xaxis=dict(title='File Name'),
+        xaxis=dict(title='File Name', categoryorder='array', categoryarray=sorted_file_names),  # Use sorted file names
         yaxis=dict(title='Abundance Percentage'),
         barmode='stack',
         legend=dict(title='Species Names'),
-        xaxis_categoryorder='total ascending'  # Sort the x-axis labels
     )
 
     # Create figure
