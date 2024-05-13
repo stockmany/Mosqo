@@ -14,33 +14,23 @@ Abundance percentage calculations are performed using harmonic mean calculations
 - **Abundance Calculation:** Processes PAF files to calculate the abundance of different species based on alignment data.
 - **Visualization:** Generates interactive bar plots using Plotly to visualize the abundance percentages of different species across samples.
 
-## Usage
-
-1. Clone the repository:
-
+## Installation
+1. Create conda environment.
+```bash
+conda create -n env_name python=3.12.* pandas plotly minimap2
+```
+2. Clone the repository:
 ```bash
 git clone https://github.com/stockmany/SKEETER
 ```
 
-2. Navigate to the Directory:
-```
-cd SKEETER
-```
-3. Install dependencies
-```
-pip install -r requirements.txt
-```
-4. Install minimap2
-```
-conda install minimap2
-```
-5. Run the script
-```
-python P2RA.py
+## Usage
+```bash
+python SKEETER/P2RA.py
 ```
 
 optional: add alias for easier command
-```
+```bash
 echo 'alias Skeeter="~/SKEETER/P2RA.py" '>> ~/.bashrc
 ```
 
