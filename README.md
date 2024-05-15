@@ -28,11 +28,13 @@ git clone https://github.com/stockmany/SKEETER
 ```bash
 cd SKEETER
 ```
-usage:
 ```bash
 python P2RA.py -i [input_folder/file] -o [output_directory]
 ```
 
+optional arguments:
+  -h, --help            show this help message and exit
+  
 optional: add alias for easier command
 ```bash
 echo 'alias Skeeter="~/SKEETER/P2RA.py" '>> ~/.bashrc
