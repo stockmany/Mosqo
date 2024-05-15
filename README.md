@@ -17,7 +17,7 @@ Abundance percentage calculations are performed using harmonic mean calculations
 ## Installation
 1. Create conda environment.
 ```bash
-conda create -n env_name python=3.12.* pandas plotly minimap2
+conda create -n env_name python=3.12.* pandas plotly minimap2 -c bioconda
 ```
 2. Clone the repository:
 ```bash
