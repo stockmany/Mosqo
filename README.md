@@ -26,7 +26,11 @@ git clone https://github.com/stockmany/SKEETER
 
 ## Usage
 ```bash
-python SKEETER/P2RA.py -i [input_folder/file] -o [output_directory]
+cd SKEETER
+```
+usage:
+```bash
+python P2RA.py -i [input_folder/file] -o [output_directory]
 ```
 
 optional: add alias for easier command
