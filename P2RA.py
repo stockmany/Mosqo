@@ -1,6 +1,6 @@
-import argparse
 import os
 import subprocess
+import argparse
 import pandas as pd
 import plotly.graph_objs as go
 
@@ -80,6 +80,12 @@ def run_minimap2(input_folder, output_folder):
     os.makedirs(paf_output_folder, exist_ok=True)
     os.makedirs(csv_output_folder, exist_ok=True)
 
+    # Get the directory of the script
+    basepath = os.path.dirname(__file__)
+
+    # Construct the path to COI_database.fasta in the SKEETER directory
+    database_path = os.path.join(basepath,'COI_database.fasta')
+
     # List all files in the input folder
     files = os.listdir(input_folder)
 
@@ -96,7 +102,7 @@ def run_minimap2(input_folder, output_folder):
         output_paf = os.path.join(paf_output_folder, os.path.splitext(query_file)[0] + ".paf")
         with open(output_paf, 'w') as f:
             print("Minimap2 is running")
-            subprocess.run(['minimap2', '-x', 'sr', 'COI_database.fasta', os.path.join(input_folder, query_file)], stdout=f, stderr=subprocess.DEVNULL)
+            subprocess.run(['minimap2', '-x', 'sr', database_path, os.path.join(input_folder, query_file)], stdout=f, stderr=subprocess.DEVNULL)
         
         # Check the size of the generated PAF file
         paf_size_kb = os.path.getsize(output_paf) / 1024  # Convert bytes to KB
