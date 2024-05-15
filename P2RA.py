@@ -1,3 +1,4 @@
+import argparse
 import os
 import subprocess
 import pandas as pd
@@ -108,19 +109,14 @@ def run_minimap2(input_folder, output_folder):
         # Proceed with further processing if the PAF file is large enough
         process_paf(output_paf, output_folder)
 
-if __name__ == "__main__":
-    input_folder = input("Enter the path to the folder containing FASTQ and FASTA files: ")
-    output_folder_base = "output"
-    
+def main():
+    args = parse_arguments()
+
+    input_folder = args.input_folder
+    output_folder = args.output_folder
+
     # Check if the output folder already exists
-    output_folder = output_folder_base
-    folder_count = 1
-    while os.path.exists(output_folder):
-        output_folder = f"{output_folder_base}_{folder_count}"
-        folder_count += 1
-    
-    # Create the output directory
-    os.makedirs(output_folder)
+    os.makedirs(output_folder, exist_ok=True)
 
     # Run Minimap2 on all query files in the folder
     run_minimap2(input_folder, output_folder)
@@ -154,10 +150,10 @@ if __name__ == "__main__":
     for species_name, group in grouped_data:
         # Sort the group by file name for consistent colors in legends
         sorted_group = group.sort_values(by='File Name')
-        
+
         # Append file names for legends
         file_names.update(sorted_group['File Name'])
-        
+
         # Create bar trace for each species
         trace = go.Bar(
             x=sorted_group['File Name'],
@@ -201,3 +197,12 @@ if __name__ == "__main__":
     fig.write_html(plot_file)
 
     print(f"Plot saved as {plot_file}. Open the file in a web browser to view the plot.")
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description="Run Minimap2 alignment and analyze results")
+    parser.add_argument("-i", "--input_folder", help="Path to the folder containing FASTQ and FASTA files", required=True)
+    parser.add_argument("-o", "--output_folder", help="Path to the output folder (default: output)", default="output")
+    return parser.parse_args()
+
+if __name__ == "__main__":
+    main()
