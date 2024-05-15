@@ -26,10 +26,7 @@ git clone https://github.com/stockmany/SKEETER
 
 ## Usage
 ```bash
-cd SKEETER
-```
-```bash
-python P2RA.py -i [input_folder/file] -o [output_directory]
+python SKEETER/P2RA.py -i [input_folder/file] -o [output_directory]
 ```
 
 optional arguments:
