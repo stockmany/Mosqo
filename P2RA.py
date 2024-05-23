@@ -102,7 +102,7 @@ def run_minimap2(input_folder, output_folder):
         output_paf = os.path.join(paf_output_folder, os.path.splitext(query_file)[0] + ".paf")
         with open(output_paf, 'w') as f:
             print("Minimap2 is running")
-            subprocess.run(['minimap2', '-x', 'sr', database_path, os.path.join(input_folder, query_file)], stdout=f, stderr=subprocess.DEVNULL)
+            subprocess.run(['minimap2', '-x', 'map-ont', database_path, os.path.join(input_folder, query_file)], stdout=f, stderr=subprocess.DEVNULL)
         
         # Check the size of the generated PAF file
         paf_size_kb = os.path.getsize(output_paf) / 1024  # Convert bytes to KB
