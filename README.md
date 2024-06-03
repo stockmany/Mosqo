@@ -47,7 +47,7 @@ It calculates the harmonic mean of alignment length and number of matches for ea
 
 **Abundance Calculation:**
 The script calculates the relative abundance of each species based on the alignment data.
-Species with counts less than 20 are grouped as "other <1%" category.
+Species with counts less than 1 are grouped as "other <1%" category.
 
 **Data Visualization:**
 The abundance data is visualized using Plotly, generating a stacked bar plot showing abundance percentages for each species across different samples.
